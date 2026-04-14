@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{DOMAIN}}</title>
+  <meta name="description" content="{{HEADLINE}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script defer src="assets/site.js"></script>
+</head>
+<body data-domain="{{DOMAIN}}">
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="grid-mask" aria-hidden="true"></div>
+
+  <main class="shell">
+    <header class="site-header reveal">
+      <p class="brand">{{DOMAIN}}</p>
+      <p class="status">Static launch page</p>
+    </header>
+
+    <section class="hero reveal">
+      <p class="eyebrow">{{EYEBROW}}</p>
+      <h1>{{HEADLINE}}</h1>
+      <p class="subhead">{{SUBHEAD}}</p>
+
+      <div class="cta-row">
+        <a class="cta primary" href="{{PRIMARY_HREF}}" target="_blank" rel="noreferrer">{{PRIMARY_LABEL}}</a>
+        <a class="cta secondary" href="{{SECONDARY_HREF}}" target="_blank" rel="noreferrer">{{SECONDARY_LABEL}}</a>
+      </div>
+    </section>
+
+    <footer class="site-footer reveal">
+      <p>Domain owner: Tsvetomir Pavlov</p>
+      <p>Updated <span id="year"></span></p>
+    </footer>
+  </main>
+</body>
+</html>
