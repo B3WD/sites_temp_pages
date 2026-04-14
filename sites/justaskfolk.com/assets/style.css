@@ -7,6 +7,9 @@
   --amber: #f2a64b;
   --line: rgba(255, 255, 255, 0.16);
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  --pointer-alpha: 0.18;
 }
 
 * {
@@ -37,8 +40,10 @@ body {
 }
 
 .ambient {
+  opacity: 0.95;
   background: radial-gradient(circle at 72% 76%, rgba(78, 215, 181, 0.12), transparent 28%),
-              radial-gradient(circle at 18% 82%, rgba(242, 166, 75, 0.12), transparent 32%);
+              radial-gradient(circle at 18% 82%, rgba(242, 166, 75, 0.12), transparent 32%),
+              radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(78, 215, 181, var(--pointer-alpha)), transparent 24%);
 }
 
 .grid-mask {
@@ -200,5 +205,11 @@ h1 {
   .cta {
     width: 100%;
     text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient {
+    opacity: 0.9;
   }
 }

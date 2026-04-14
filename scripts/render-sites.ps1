@@ -32,10 +32,6 @@ foreach ($site in $sites) {
   $content = $content.Replace("{{EYEBROW}}", [string]$site.eyebrow)
   $content = $content.Replace("{{HEADLINE}}", [string]$site.headline)
   $content = $content.Replace("{{SUBHEAD}}", [string]$site.subhead)
-  $content = $content.Replace("{{PRIMARY_LABEL}}", [string]$site.primaryLabel)
-  $content = $content.Replace("{{PRIMARY_HREF}}", [string]$site.primaryHref)
-  $content = $content.Replace("{{SECONDARY_LABEL}}", [string]$site.secondaryLabel)
-  $content = $content.Replace("{{SECONDARY_HREF}}", [string]$site.secondaryHref)
 
   Set-Content -Path (Join-Path $domainRoot "index.html") -Value $content -Encoding UTF8
   Copy-Item -Path $stylePath -Destination (Join-Path $assetsRoot "style.css") -Force

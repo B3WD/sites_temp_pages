@@ -48,6 +48,27 @@ Example output directories:
 - `sites/bigechochamber.com`
 - `sites/owisewords.com`
 
+## Automate deploys with GitHub Actions
+
+This repository includes a workflow at `.github/workflows/deploy-pages.yml`.
+
+What it does:
+
+- Runs on every push to `main` (and can be triggered manually).
+- Regenerates all site folders with `scripts/render-sites.ps1`.
+- Deploys each domain folder to its matching Cloudflare Pages project.
+
+Required GitHub repository secrets:
+
+- `CLOUDFLARE_API_TOKEN`: Cloudflare API token with Pages write permissions.
+- `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID.
+
+Where to add secrets in GitHub:
+
+1. Open repository Settings.
+2. Go to Secrets and variables > Actions.
+3. Add both secrets above.
+
 ## Attach domains
 
 For each Pages project:

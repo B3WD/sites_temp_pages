@@ -1,0 +1,63 @@
+name: Deploy Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "shared/**"
+      - "templates/**"
+      - "scripts/**"
+      - "sites.config.json"
+      - "sites/**"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - project: heylikemagic-com
+            directory: sites/heylikemagic.com
+          - project: askyourcrowd-com
+            directory: sites/askyourcrowd.com
+          - project: justaskfolk-com
+            directory: sites/justaskfolk.com
+          - project: bigechochamber-com
+            directory: sites/bigechochamber.com
+          - project: owisewords-com
+            directory: sites/owisewords.com
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install Wrangler
+        run: npm install --global wrangler@4
+
+      - name: Generate static sites
+        shell: pwsh
+        run: ./scripts/render-sites.ps1
+
+      - name: Deploy to Cloudflare Pages
+        run: |
+          wrangler pages deploy "${{ matrix.directory }}" \
+            --project-name "${{ matrix.project }}" \
+            --branch main \
+            --commit-hash "${{ github.sha }}" \
+            --commit-message "GitHub Actions deploy ${{ github.sha }}"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
